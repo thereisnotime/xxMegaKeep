@@ -38,3 +38,9 @@ or
 ```bash
 ./xxMegaKeep.sh
 ```
+
+## Todos
+
+- [ ] Fix the uploading for the PowerShell version.
+- [ ] Create a script to set everything up on a fresh device - Windows/Linux/Mac.
+- [ ] Add example setup snippet for a cronjob and for a sheduled task.
