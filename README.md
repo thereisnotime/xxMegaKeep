@@ -39,6 +39,61 @@ or
 ./xxMegaKeep.sh
 ```
 
+## Systemd Setup
+
+`~/.config/systemd/user/xxmegakeep.service`:
+
+```ini
+[Unit]
+Description=Run xxMegaKeep script
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Private/Projects/personal/xxMegaKeep
+ExecStart=/usr/bin/bash xxMegaKeep.sh
+```
+
+`~/.config/systemd/user/xxmegakeep.timer`:
+
+```ini
+[Unit]
+Description=Run xxMegaKeep every week
+
+[Timer]
+OnCalendar=weekly       # runs once per week on the same weekday/time the timer is first started
+Persistent=true         # catch-up run if the system was off
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now xxmegakeep.timer
+```
+
+Check status/logs:
+
+```bash
+# Next run & last run
+systemctl --user list-timers xxmegakeep.timer
+
+# Detailed unit status
+systemctl --user status xxmegakeep.timer
+systemctl --user status xxmegakeep.service
+
+# Reverse-chronological logs for the service
+journalctl --user -u xxmegakeep.service -r
+```
+
+Manual run:
+
+```bash
+systemctl --user start xxmegakeep.service
+```
+
 ## Todos
 
 - [ ] Fix the uploading for the PowerShell version.
