@@ -1,7 +1,10 @@
 # Secrets
 .env
 .accounts
+
+# Logs
 xxMegaKeep.log
+xxMegaKeep.txt
 
 # IDEs
 .idea
